@@ -1,11 +1,203 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>donatasd.com</title>
-<style>body{font-family:system-ui,sans-serif;max-width:640px;margin:4rem auto;padding:0 1rem;line-height:1.6}</style></head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Donatas Daubaras</title>
+<meta name="description" content="Donatas Daubaras, Senior Software Engineer in Vilnius, Lithuania. 10+ years building software in Go, Java and TypeScript.">
+<link rel="canonical" href="https://donatasd.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b5cad'/%3E%3Ctext x='32' y='44' font-family='system-ui,sans-serif' font-size='36' font-weight='700' text-anchor='middle' fill='white'%3ED%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="Donatas Daubaras">
+<meta property="og:description" content="Senior Software Engineer in Vilnius, Lithuania. 10+ years building software in Go, Java and TypeScript.">
+<meta property="og:url" content="https://donatasd.com/">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666666;
+    --rule: #e5e5e5;
+    --link: #0b5cad;
+    --accent-bg: #f5f5f5;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121212;
+      --fg: #ebebeb;
+      --muted: #9a9a9a;
+      --rule: #2c2c2c;
+      --link: #7db4ea;
+      --accent-bg: #1c1c1c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    padding: 3rem 1rem 4rem;
+    background: var(--bg);
+    color: var(--fg);
+    font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  main { max-width: 680px; margin: 0 auto; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover, a:focus { text-decoration: underline; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 .25rem; letter-spacing: -0.01em; }
+  h2 {
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    margin: 3rem 0 1rem;
+    padding-bottom: .4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  p { margin: 0 0 1rem; }
+  .role { font-size: 1.15rem; margin: 0; }
+  .meta { color: var(--muted); margin: 0 0 1.5rem; }
+  .links { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; padding: 0; margin: 0 0 1rem; list-style: none; }
+  .links a { font-weight: 500; }
+  dl.timeline { margin: 0; }
+  dl.timeline > div {
+    display: grid;
+    grid-template-columns: 11.5rem 1fr;
+    gap: 0 1rem;
+    padding: .65rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  dl.timeline > div:last-child { border-bottom: 0; }
+  dl.timeline dt { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  dl.timeline dd { margin: 0; }
+  dl.timeline dd .where { color: var(--muted); }
+  dl.timeline dd .sub { display: block; color: var(--muted); font-size: .95rem; }
+  ul.projects { list-style: none; padding: 0; margin: 0; }
+  ul.projects li {
+    padding: .9rem 1rem;
+    margin-bottom: .75rem;
+    background: var(--accent-bg);
+    border-radius: 8px;
+  }
+  ul.projects li strong { display: block; margin-bottom: .15rem; }
+  ul.projects li .tag { color: var(--muted); font-size: .9rem; margin-left: .5rem; font-weight: normal; }
+  ul.projects li p { margin: 0 0 .35rem; }
+  ul.projects li .project-links { font-size: .95rem; }
+  ul.projects li .project-links a + a { margin-left: 1rem; }
+  footer { margin-top: 4rem; color: var(--muted); font-size: .9rem; }
+  @media (max-width: 480px) {
+    body { padding-top: 2rem; font-size: 16px; }
+    h1 { font-size: 1.7rem; }
+    dl.timeline > div { grid-template-columns: 1fr; gap: 0; }
+    dl.timeline dt { font-size: .9rem; }
+  }
+</style>
+</head>
 <body>
-<h1>Donatas Daubaras</h1>
-<ul>
-<li><a href="/garbage/">🗑️ Garbage collection calendar — Samanų g., Didžioji Riešė</a></li>
-</ul>
+<main>
+  <header>
+    <h1>Donatas Daubaras</h1>
+    <p class="role">Senior Software Engineer at <a href="https://www.turingcollege.com/">Turing College</a></p>
+    <p class="meta">Vilnius, Lithuania</p>
+    <ul class="links">
+      <li><a href="https://github.com/DonatasD" rel="me">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/ddaubaras/" rel="me">LinkedIn</a></li>
+      <li><a href="https://stackoverflow.com/users/4611077/donatasd" rel="me">Stack Overflow</a></li>
+      <li><a href="https://x.com/DonatasDaubar" rel="me">X</a></li>
+    </ul>
+  </header>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>I'm a software engineer with 10+ years in the industry, working mostly in Go, Java and TypeScript. I've led an engineering team and worked as a technical architect at Shift4, and I chose to go back to hands-on engineering because I like shipping things.</p>
+    <p>I studied computer science at Newcastle University and spent a year in its Cloud Computing for Big Data doctoral training programme before moving back to Lithuania. Outside work I build small tools for my family and tinker with games.</p>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <dl class="timeline">
+      <div>
+        <dt>Dec 2024 &ndash; present</dt>
+        <dd>Senior Software Engineer <span class="where">&middot; Turing College, Vilnius</span></dd>
+      </div>
+      <div>
+        <dt>Sep 2024 &ndash; Dec 2024</dt>
+        <dd>Senior Software Engineer <span class="where">&middot; Billo, Vilnius</span></dd>
+      </div>
+      <div>
+        <dt>Sep 2023 &ndash; Sep 2024</dt>
+        <dd>Senior Software Engineer <span class="where">&middot; Barbora, Vilnius</span></dd>
+      </div>
+      <div>
+        <dt>Jun 2023 &ndash; Jun 2024</dt>
+        <dd>Technical Architect <span class="where">&middot; Shift4 Payments, Vilnius</span></dd>
+      </div>
+      <div>
+        <dt>Oct 2020 &ndash; Jun 2023</dt>
+        <dd>Software Engineering Team Lead <span class="where">&middot; Shift4 Payments, Vilnius</span></dd>
+      </div>
+      <div>
+        <dt>Apr 2018 &ndash; Oct 2020</dt>
+        <dd>Senior Software Developer <span class="where">&middot; Corner Case Technologies, Vilnius</span></dd>
+      </div>
+      <div>
+        <dt>Aug 2016 &ndash; May 2018</dt>
+        <dd>Software Developer <span class="where">&middot; Zenitech, Lithuania</span></dd>
+      </div>
+      <div>
+        <dt>2013 &ndash; 2014</dt>
+        <dd>Software Developer <span class="where">&middot; Trotec Laser, Newcastle upon Tyne</span><span class="sub">Two placements alongside university studies</span></dd>
+      </div>
+    </dl>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul class="projects">
+      <li>
+        <strong>Garbage collection calendar <span class="tag">JavaScript</span></strong>
+        <p>iCal feed for waste collection days at Saman&#371; g., Did&#382;ioji Rie&#353;&#279;. Subscribe once and the pickups show up in your calendar.</p>
+        <span class="project-links"><a href="https://garbage.donugne.com/">Live</a><a href="https://github.com/DonatasD/garbage">Source</a></span>
+      </li>
+      <li>
+        <strong>Sports diary <span class="tag">TypeScript &middot; Next.js &middot; Supabase</span></strong>
+        <p>A private, mobile-first diary for padel, running and gym sessions. Logs how a session went and what to work on next, with optional Strava sync.</p>
+        <span class="project-links"><a href="https://sports-progress-diary.vercel.app">Live</a><a href="https://github.com/DonatasD/sport-progress-diary">Source</a></span>
+      </li>
+      <li>
+        <strong>Family recipes <span class="tag">TypeScript</span></strong>
+        <p>Don and Ugn&#279;'s recipes, in one place.</p>
+        <span class="project-links"><a href="https://don-ugne-recipes.vercel.app">Live</a><a href="https://github.com/DonatasD/family-recipes">Source</a></span>
+      </li>
+      <li>
+        <strong>Helheim <span class="tag">Rust &middot; Bevy</span></strong>
+        <p>A Slay-the-Spire-style roguelike deck-builder set on the Norse barrow road. Pure, deterministic rules engine with a Bevy front end.</p>
+        <span class="project-links"><a href="https://github.com/DonatasD/hellheim">Source</a></span>
+      </li>
+      <li>
+        <strong>Word Wars <span class="tag">TypeScript</span></strong>
+        <p>A word game experiment.</p>
+        <span class="project-links"><a href="https://github.com/DonatasD/word-wars">Source</a></span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <dl class="timeline">
+      <div>
+        <dt>2015 &ndash; 2016</dt>
+        <dd>PhD programme, CDT in Cloud Computing for Big Data <span class="where">&middot; Newcastle University</span></dd>
+      </div>
+      <div>
+        <dt>2011 &ndash; 2015</dt>
+        <dd>MComp Computer Science, Mobile and Distributed Systems <span class="where">&middot; Newcastle University</span></dd>
+      </div>
+    </dl>
+  </section>
+
+  <footer>
+    <p>Reach me on <a href="https://www.linkedin.com/in/ddaubaras/">LinkedIn</a>. Lithuanian and English.</p>
+  </footer>
+</main>
 </body>
 </html>
