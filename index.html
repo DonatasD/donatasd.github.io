@@ -6,197 +6,301 @@
 <title>Donatas Daubaras</title>
 <meta name="description" content="Donatas Daubaras, Senior Software Engineer in Vilnius, Lithuania. 10+ years building software in Go, Java and TypeScript.">
 <link rel="canonical" href="https://donatasd.com/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b5cad'/%3E%3Ctext x='32' y='44' font-family='system-ui,sans-serif' font-size='36' font-weight='700' text-anchor='middle' fill='white'%3ED%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121214">
 <meta property="og:title" content="Donatas Daubaras">
 <meta property="og:description" content="Senior Software Engineer in Vilnius, Lithuania. 10+ years building software in Go, Java and TypeScript.">
 <meta property="og:url" content="https://donatasd.com/">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://donatasd.com/assets/portrait.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%232f6fb5'/%3E%3Ctext x='32' y='45' font-family='system-ui,sans-serif' font-size='38' font-weight='600' text-anchor='middle' fill='white'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <style>
+  /*
+    Design notes
+    - One neutral family (zinc), one accent, auto light/dark.
+    - Shape rule: everything is square. The portrait is the single round element.
+    - Motion: colour transitions only, disabled under reduced motion.
+  */
   :root {
     --bg: #ffffff;
-    --fg: #1a1a1a;
-    --muted: #666666;
-    --rule: #e5e5e5;
-    --link: #0b5cad;
-    --accent-bg: #f5f5f5;
+    --fg: #18181b;
+    --muted: #71717a;
+    --rule: #e4e4e7;
+    --accent: #2f6fb5;
+    --sans: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
     color-scheme: light dark;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #121212;
-      --fg: #ebebeb;
-      --muted: #9a9a9a;
-      --rule: #2c2c2c;
-      --link: #7db4ea;
-      --accent-bg: #1c1c1c;
+      --bg: #121214;
+      --fg: #ededef;
+      --muted: #a1a1aa;
+      --rule: #27272a;
+      --accent: #7fb0e6;
     }
   }
+
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
-    padding: 3rem 1rem 4rem;
+    padding: 0 1rem 5rem;
     background: var(--bg);
     color: var(--fg);
-    font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font: 400 1.0625rem/1.6 var(--sans);
+    -webkit-tap-highlight-color: transparent;
   }
-  main { max-width: 680px; margin: 0 auto; }
-  a { color: var(--link); text-decoration: none; }
-  a:hover, a:focus { text-decoration: underline; }
-  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 .25rem; letter-spacing: -0.01em; }
-  h2 {
-    font-size: 1.05rem;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    color: var(--muted);
-    margin: 3rem 0 1rem;
-    padding-bottom: .4rem;
-    border-bottom: 1px solid var(--rule);
+  main { max-width: 740px; margin: 0 auto; }
+  p { margin: 0 0 1rem; text-wrap: pretty; }
+  h1, h2, h3 { margin: 0; text-wrap: balance; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    touch-action: manipulation;
+    transition: color 150ms ease, text-decoration-color 150ms ease;
   }
-  p { margin: 0 0 1rem; }
-  .role { font-size: 1.15rem; margin: 0; }
-  .meta { color: var(--muted); margin: 0 0 1.5rem; }
-  .links { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; padding: 0; margin: 0 0 1rem; list-style: none; }
-  .links a { font-weight: 500; }
-  dl.timeline { margin: 0; }
-  dl.timeline > div {
+  a:hover { text-decoration-color: currentColor; }
+  a:focus-visible, .skip:focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .skip {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    padding: .5rem .75rem;
+    background: var(--fg);
+    color: var(--bg);
+    text-decoration: none;
+  }
+  .skip:focus { top: 1rem; }
+
+  /* Hero */
+  .hero {
     display: grid;
-    grid-template-columns: 11.5rem 1fr;
-    gap: 0 1rem;
-    padding: .65rem 0;
-    border-bottom: 1px solid var(--rule);
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem 2.5rem;
+    align-items: center;
+    padding-top: 5rem;
   }
-  dl.timeline > div:last-child { border-bottom: 0; }
-  dl.timeline dt { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
-  dl.timeline dd { margin: 0; }
-  dl.timeline dd .where { color: var(--muted); }
-  dl.timeline dd .sub { display: block; color: var(--muted); font-size: .95rem; }
-  ul.projects { list-style: none; padding: 0; margin: 0; }
-  ul.projects li {
-    padding: .9rem 1rem;
-    margin-bottom: .75rem;
-    background: var(--accent-bg);
-    border-radius: 8px;
+  .hero h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
   }
-  ul.projects li strong { display: block; margin-bottom: .15rem; }
-  ul.projects li .tag { color: var(--muted); font-size: .9rem; margin-left: .5rem; font-weight: normal; }
-  ul.projects li p { margin: 0 0 .35rem; }
-  ul.projects li .project-links { font-size: .95rem; }
-  ul.projects li .project-links a + a { margin-left: 1rem; }
-  footer { margin-top: 4rem; color: var(--muted); font-size: .9rem; }
-  @media (max-width: 480px) {
-    body { padding-top: 2rem; font-size: 16px; }
-    h1 { font-size: 1.7rem; }
-    dl.timeline > div { grid-template-columns: 1fr; gap: 0; }
-    dl.timeline dt { font-size: .9rem; }
+  .hero .role { font-size: 1.125rem; margin: .5rem 0 0; }
+  .hero .role span { color: var(--muted); }
+  .hero img {
+    display: block;
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem 1.5rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-weight: 500;
+  }
+
+  /* Sections */
+  section { margin-top: 4.5rem; }
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    scroll-margin-top: 1rem;
+  }
+  .about p { max-width: 62ch; color: var(--fg); }
+
+  /* Experience and education: date rail + body, no hairlines */
+  .rail { list-style: none; margin: 0; padding: 0; }
+  .rail > li {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: .25rem 1.5rem;
+    padding: .9rem 0;
+  }
+  .when {
+    font-family: var(--mono);
+    font-size: .875rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    padding-top: .2rem;
+  }
+  .org { font-weight: 600; display: block; }
+  .roles { margin: 0; padding: 0; list-style: none; }
+  .roles li { display: block; padding: 0; color: var(--muted); }
+  .roles .sub { font-family: var(--mono); font-size: .8125rem; margin-left: .5rem; }
+  .place { color: var(--muted); }
+
+  /* Projects: two-column grid, one rule above */
+  .projects {
+    list-style: none;
+    margin: 0;
+    padding: 1.5rem 0 0;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.25rem 3rem;
+  }
+  .projects h3 { font-size: 1.0625rem; font-weight: 600; }
+  .projects p { margin: .35rem 0 .6rem; color: var(--muted); font-size: 1rem; }
+  .projects .foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .25rem 1.25rem;
+    font-size: .9375rem;
+    font-weight: 500;
+  }
+  .projects .tag {
+    font-family: var(--mono);
+    font-size: .8125rem;
+    font-weight: 400;
+    color: var(--muted);
+    margin-right: auto;
+  }
+
+  footer { margin-top: 5rem; color: var(--muted); font-size: .9375rem; }
+
+  @media (max-width: 600px) {
+    body { font-size: 1rem; }
+    .hero { grid-template-columns: 1fr; padding-top: 3rem; }
+    .hero img { width: 88px; height: 88px; order: -1; }
+    .hero h1 { font-size: 2rem; }
+    .rail > li { grid-template-columns: 1fr; gap: .15rem; }
+    .roles .sub { display: block; margin-left: 0; }
+    .projects { grid-template-columns: 1fr; gap: 1.75rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a { transition: none; }
   }
 </style>
 </head>
 <body>
-<main>
-  <header>
-    <h1>Donatas Daubaras</h1>
-    <p class="role">Senior Software Engineer at <a href="https://www.turingcollege.com/">Turing College</a></p>
-    <p class="meta">Vilnius, Lithuania</p>
-    <ul class="links">
-      <li><a href="https://github.com/DonatasD" rel="me">GitHub</a></li>
-      <li><a href="https://www.linkedin.com/in/ddaubaras/" rel="me">LinkedIn</a></li>
-      <li><a href="https://stackoverflow.com/users/4611077/donatasd" rel="me">Stack Overflow</a></li>
-      <li><a href="https://x.com/DonatasDaubar" rel="me">X</a></li>
-    </ul>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+  <header class="hero">
+    <div>
+      <h1>Donatas Daubaras</h1>
+      <p class="role">Senior Software Engineer at <a href="https://www.turingcollege.com/">Turing&nbsp;College</a><br><span>Vilnius, Lithuania</span></p>
+      <ul class="links">
+        <li><a href="https://github.com/DonatasD" rel="me">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/ddaubaras/" rel="me">LinkedIn</a></li>
+        <li><a href="https://stackoverflow.com/users/4611077/donatasd" rel="me">Stack Overflow</a></li>
+        <li><a href="https://x.com/DonatasDaubar" rel="me">X</a></li>
+      </ul>
+    </div>
+    <img src="/assets/portrait.jpg" width="460" height="460" alt="Donatas Daubaras smiling at an outdoor table in the evening" fetchpriority="high">
   </header>
 
-  <section id="about">
-    <h2>About</h2>
-    <p>I'm a software engineer with 10+ years in the industry, working mostly in Go, Java and TypeScript. I've led an engineering team and worked as a technical architect at Shift4, and I chose to go back to hands-on engineering because I like shipping things.</p>
+  <section class="about" aria-labelledby="about">
+    <h2 id="about">About</h2>
+    <p>I’m a software engineer with 10+ years in the industry, working mostly in Go, Java and TypeScript. I’ve led an engineering team and worked as a technical architect at Shift4, and I chose to go back to hands-on engineering because I like shipping things.</p>
     <p>I studied computer science at Newcastle University and spent a year in its Cloud Computing for Big Data doctoral training programme before moving back to Lithuania. Outside work I build small tools for my family and tinker with games.</p>
   </section>
 
-  <section id="experience">
-    <h2>Experience</h2>
-    <dl class="timeline">
-      <div>
-        <dt>Dec 2024 &ndash; present</dt>
-        <dd>Senior Software Engineer <span class="where">&middot; Turing College, Vilnius</span></dd>
-      </div>
-      <div>
-        <dt>Sep 2024 &ndash; Dec 2024</dt>
-        <dd>Senior Software Engineer <span class="where">&middot; Billo, Vilnius</span></dd>
-      </div>
-      <div>
-        <dt>Sep 2023 &ndash; Sep 2024</dt>
-        <dd>Senior Software Engineer <span class="where">&middot; Barbora, Vilnius</span></dd>
-      </div>
-      <div>
-        <dt>Jun 2023 &ndash; Jun 2024</dt>
-        <dd>Technical Architect <span class="where">&middot; Shift4 Payments, Vilnius</span></dd>
-      </div>
-      <div>
-        <dt>Oct 2020 &ndash; Jun 2023</dt>
-        <dd>Software Engineering Team Lead <span class="where">&middot; Shift4 Payments, Vilnius</span></dd>
-      </div>
-      <div>
-        <dt>Apr 2018 &ndash; Oct 2020</dt>
-        <dd>Senior Software Developer <span class="where">&middot; Corner Case Technologies, Vilnius</span></dd>
-      </div>
-      <div>
-        <dt>Aug 2016 &ndash; May 2018</dt>
-        <dd>Software Developer <span class="where">&middot; Zenitech, Lithuania</span></dd>
-      </div>
-      <div>
-        <dt>2013 &ndash; 2014</dt>
-        <dd>Software Developer <span class="where">&middot; Trotec Laser, Newcastle upon Tyne</span><span class="sub">Two placements alongside university studies</span></dd>
-      </div>
-    </dl>
+  <section aria-labelledby="experience">
+    <h2 id="experience">Experience</h2>
+    <ol class="rail">
+      <li>
+        <span class="when">Dec 2024 - present</span>
+        <div><span class="org">Turing College</span><ul class="roles"><li>Senior Software Engineer</li></ul></div>
+      </li>
+      <li>
+        <span class="when">Sep 2024 - Dec 2024</span>
+        <div><span class="org">Billo</span><ul class="roles"><li>Senior Software Engineer</li></ul></div>
+      </li>
+      <li>
+        <span class="when">Sep 2023 - Sep 2024</span>
+        <div><span class="org">Barbora</span><ul class="roles"><li>Senior Software Engineer</li></ul></div>
+      </li>
+      <li>
+        <span class="when">Oct 2020 - Jun 2024</span>
+        <div>
+          <span class="org">Shift4 Payments</span>
+          <ul class="roles">
+            <li>Technical Architect <span class="sub">Jun 2023 - Jun 2024</span></li>
+            <li>Software Engineering Team Lead <span class="sub">Oct 2020 - Jun 2023</span></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <span class="when">Apr 2018 - Oct 2020</span>
+        <div><span class="org">Corner Case Technologies</span><ul class="roles"><li>Senior Software Developer</li></ul></div>
+      </li>
+      <li>
+        <span class="when">Aug 2016 - May 2018</span>
+        <div><span class="org">Zenitech</span><ul class="roles"><li>Software Developer</li></ul></div>
+      </li>
+      <li>
+        <span class="when">2013 - 2014</span>
+        <div><span class="org">Trotec Laser <span class="place">Newcastle upon Tyne</span></span><ul class="roles"><li>Software Developer, two placements alongside university</li></ul></div>
+      </li>
+    </ol>
   </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
+  <section aria-labelledby="projects">
+    <h2 id="projects">Projects</h2>
     <ul class="projects">
       <li>
-        <strong>Garbage collection calendar <span class="tag">JavaScript</span></strong>
-        <p>iCal feed for waste collection days at Saman&#371; g., Did&#382;ioji Rie&#353;&#279;. Subscribe once and the pickups show up in your calendar.</p>
-        <span class="project-links"><a href="https://garbage.donugne.com/">Live</a><a href="https://github.com/DonatasD/garbage">Source</a></span>
+        <h3>Garbage collection calendar</h3>
+        <p>iCal feed for waste collection days at Samanų g., Didžioji Riešė. Subscribe once and the pickups show up in your calendar.</p>
+        <div class="foot"><span class="tag">JavaScript</span><a href="https://garbage.donugne.com/">Live</a><a href="https://github.com/DonatasD/garbage">Source</a></div>
       </li>
       <li>
-        <strong>Sports diary <span class="tag">TypeScript &middot; Next.js &middot; Supabase</span></strong>
-        <p>A private, mobile-first diary for padel, running and gym sessions. Logs how a session went and what to work on next, with optional Strava sync.</p>
-        <span class="project-links"><a href="https://sports-progress-diary.vercel.app">Live</a><a href="https://github.com/DonatasD/sport-progress-diary">Source</a></span>
+        <h3>Sports diary</h3>
+        <p>A private, mobile-first diary for padel, running and gym sessions, with optional Strava sync.</p>
+        <div class="foot"><span class="tag">TypeScript, Next.js, Supabase</span><a href="https://sports-progress-diary.vercel.app">Live</a><a href="https://github.com/DonatasD/sport-progress-diary">Source</a></div>
       </li>
       <li>
-        <strong>Family recipes <span class="tag">TypeScript</span></strong>
-        <p>Don and Ugn&#279;'s recipes, in one place.</p>
-        <span class="project-links"><a href="https://don-ugne-recipes.vercel.app">Live</a><a href="https://github.com/DonatasD/family-recipes">Source</a></span>
+        <h3>Family recipes</h3>
+        <p>Don and Ugnė’s recipes, in one place.</p>
+        <div class="foot"><span class="tag">TypeScript</span><a href="https://don-ugne-recipes.vercel.app">Live</a><a href="https://github.com/DonatasD/family-recipes">Source</a></div>
       </li>
       <li>
-        <strong>Helheim <span class="tag">Rust &middot; Bevy</span></strong>
-        <p>A Slay-the-Spire-style roguelike deck-builder set on the Norse barrow road. Pure, deterministic rules engine with a Bevy front end.</p>
-        <span class="project-links"><a href="https://github.com/DonatasD/hellheim">Source</a></span>
+        <h3>Helheim</h3>
+        <p>A Slay-the-Spire-style roguelike deck-builder set on the Norse barrow road. Deterministic rules engine, Bevy front end.</p>
+        <div class="foot"><span class="tag">Rust, Bevy</span><a href="https://github.com/DonatasD/hellheim">Source</a></div>
       </li>
       <li>
-        <strong>Word Wars <span class="tag">TypeScript</span></strong>
+        <h3>Word Wars</h3>
         <p>A word game experiment.</p>
-        <span class="project-links"><a href="https://github.com/DonatasD/word-wars">Source</a></span>
+        <div class="foot"><span class="tag">TypeScript</span><a href="https://github.com/DonatasD/word-wars">Source</a></div>
       </li>
     </ul>
   </section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <dl class="timeline">
-      <div>
-        <dt>2015 &ndash; 2016</dt>
-        <dd>PhD programme, CDT in Cloud Computing for Big Data <span class="where">&middot; Newcastle University</span></dd>
-      </div>
-      <div>
-        <dt>2011 &ndash; 2015</dt>
-        <dd>MComp Computer Science, Mobile and Distributed Systems <span class="where">&middot; Newcastle University</span></dd>
-      </div>
-    </dl>
+  <section aria-labelledby="education">
+    <h2 id="education">Education</h2>
+    <ol class="rail">
+      <li>
+        <span class="when">2015 - 2016</span>
+        <div><span class="org">Newcastle University</span><ul class="roles"><li>PhD programme, CDT in Cloud Computing for Big Data</li></ul></div>
+      </li>
+      <li>
+        <span class="when">2011 - 2015</span>
+        <div><span class="org">Newcastle University</span><ul class="roles"><li>MComp Computer Science, Mobile and Distributed Systems</li></ul></div>
+      </li>
+    </ol>
   </section>
 
   <footer>
-    <p>Reach me on <a href="https://www.linkedin.com/in/ddaubaras/">LinkedIn</a>. Lithuanian and English.</p>
+    <p>Lithuanian and English. The best way to reach me is <a href="https://www.linkedin.com/in/ddaubaras/">LinkedIn</a>.</p>
   </footer>
 </main>
 </body>
