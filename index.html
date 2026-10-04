@@ -9,27 +9,31 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121214">
 <meta property="og:title" content="Donatas Daubaras">
-<meta property="og:description" content="Senior Software Engineer in Vilnius, Lithuania. 10+ years building software in Go, Java and TypeScript.">
+<meta property="og:description" content="Backend engineer in Vilnius who likes shipping things. 10+ years, mostly Go, Java and TypeScript.">
 <meta property="og:url" content="https://donatasd.com/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://donatasd.com/assets/portrait.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%232f6fb5'/%3E%3Ctext x='32' y='45' font-family='system-ui,sans-serif' font-size='38' font-weight='600' text-anchor='middle' fill='white'%3ED%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <style>
   /*
     Design notes
     - One neutral family (zinc), one accent, auto light/dark.
     - Shape rule: everything is square. The portrait is the single round element.
-    - Motion: colour transitions only, disabled under reduced motion.
+    - Type: Bricolage Grotesque for headings, Geist for text, Geist Mono for dates and tags.
+    - Motion: a single load sequence in the hero and a 2px lift on project tiles. Off under reduced motion.
   */
   :root {
     --bg: #ffffff;
     --fg: #18181b;
     --muted: #71717a;
     --rule: #e4e4e7;
+    --tint: #eef3f9;
     --accent: #2f6fb5;
+    --accent-ink: #ffffff;
+    --display: "Bricolage Grotesque", "Geist", system-ui, sans-serif;
     --sans: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
     color-scheme: light dark;
@@ -40,12 +44,14 @@
       --fg: #ededef;
       --muted: #a1a1aa;
       --rule: #27272a;
+      --tint: #1a2330;
       --accent: #7fb0e6;
+      --accent-ink: #0c1a2a;
     }
   }
 
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   body {
     margin: 0;
     padding: 0 1rem 5rem;
@@ -54,9 +60,11 @@
     font: 400 1.0625rem/1.6 var(--sans);
     -webkit-tap-highlight-color: transparent;
   }
-  main { max-width: 740px; margin: 0 auto; }
+  main { max-width: 760px; margin: 0 auto; }
   p { margin: 0 0 1rem; text-wrap: pretty; }
-  h1, h2, h3 { margin: 0; text-wrap: balance; }
+  h1, h2, h3 { margin: 0; font-family: var(--display); text-wrap: balance; letter-spacing: -0.015em; }
+  h2 { font-size: 1.375rem; font-weight: 700; margin-bottom: 1.5rem; scroll-margin-top: 1rem; }
+  h3 { font-size: 1.0625rem; font-weight: 700; }
 
   a {
     color: var(--accent);
@@ -67,16 +75,11 @@
     transition: color 150ms ease, text-decoration-color 150ms ease;
   }
   a:hover { text-decoration-color: currentColor; }
-  a:focus-visible, .skip:focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a:focus-visible, .skip:focus, .bar:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
   .skip {
-    position: absolute;
-    left: 1rem;
-    top: -3rem;
-    padding: .5rem .75rem;
-    background: var(--fg);
-    color: var(--bg);
-    text-decoration: none;
+    position: absolute; left: 1rem; top: -3rem;
+    padding: .5rem .75rem; background: var(--fg); color: var(--bg); text-decoration: none;
   }
   .skip:focus { top: 1rem; }
 
@@ -84,110 +87,135 @@
   .hero {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 1.5rem 2.5rem;
-    align-items: center;
-    padding-top: 5rem;
+    gap: 1rem 3rem;
+    align-items: start;
+    padding-top: 4.5rem;
   }
-  .hero h1 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    line-height: 1.1;
-    letter-spacing: -0.025em;
-  }
-  .hero .role { font-size: 1.125rem; margin: .5rem 0 0; }
-  .hero .role span { color: var(--muted); }
+  .hero .mast { font-family: var(--mono); font-size: .875rem; color: var(--muted); margin: 0 0 1rem; }
+  .hero h1 { font-size: 2.375rem; line-height: 1.08; font-weight: 600; letter-spacing: -0.025em; }
+  .hero h1 em { font-style: normal; font-weight: 700; color: var(--accent); }
+  .hero .sub { font-size: 1.125rem; color: var(--muted); margin: 1rem 0 0; max-width: 46ch; }
   .hero img {
-    display: block;
-    width: 132px;
-    height: 132px;
-    border-radius: 50%;
-    object-fit: cover;
+    display: block; width: 152px; height: 152px; border-radius: 50%; object-fit: cover; margin-top: 2.25rem;
   }
   .links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .25rem 1.5rem;
-    margin: 1.25rem 0 0;
-    padding: 0;
-    list-style: none;
-    font-weight: 500;
+    display: flex; flex-wrap: wrap; gap: .25rem 1.5rem;
+    margin: 1.25rem 0 0; padding: 0; list-style: none; font-weight: 500;
   }
 
-  /* Sections */
+  /* Load sequence (G) */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero .mast, .hero h1, .hero .sub, .hero .links, .hero img {
+      animation: rise 420ms cubic-bezier(.2, .7, .2, 1) both;
+    }
+    .hero h1 { animation-delay: 120ms; }
+    .hero .sub { animation-delay: 220ms; }
+    .hero .links { animation-delay: 300ms; }
+    .hero img { animation-delay: 360ms; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .tile { transition: transform 180ms ease; }
+    .tile:hover { transform: translateY(-2px); }
+  }
+
   section { margin-top: 4.5rem; }
-  h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    margin-bottom: 1.5rem;
-    scroll-margin-top: 1rem;
-  }
-  .about p { max-width: 62ch; color: var(--fg); }
+  .about p { max-width: 62ch; }
 
-  /* Experience and education: date rail + body, no hairlines */
+  /* Career strip (C), drawn to scale from Sep 2011 to Oct 2026 */
+  .strip { margin: 0 0 2.25rem; }
+  .strip .row { position: relative; height: 26px; margin-bottom: 6px; }
+  .strip .row.edu { height: 16px; margin-top: 10px; }
+  .bar {
+    position: absolute; top: 0; height: 100%;
+    background: var(--accent); color: var(--accent-ink);
+    font-family: var(--mono); font-size: .75rem; line-height: 26px; padding: 0 .5rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    border-right: 2px solid var(--bg);
+  }
+  .row.edu .bar { background: var(--tint); color: var(--accent); line-height: 16px; font-size: .6875rem; }
+  .bar:hover, .bar:focus { overflow: visible; z-index: 2; }
+  .bar:hover::after, .bar:focus::after {
+    content: attr(data-tip);
+    position: absolute; left: 0; bottom: calc(100% + 6px);
+    background: var(--fg); color: var(--bg);
+    padding: .25rem .5rem; line-height: 1.4; white-space: nowrap;
+  }
+  .strip .axis { position: relative; height: 18px; border-top: 1px solid var(--rule); margin-top: 4px; }
+  .strip .axis span {
+    position: absolute; top: 3px; transform: translateX(-50%);
+    font-family: var(--mono); font-size: .6875rem; color: var(--muted);
+  }
+  .strip .key { font-family: var(--mono); font-size: .75rem; color: var(--muted); margin: .75rem 0 0; }
+
+  /* Grouped list under the strip */
   .rail { list-style: none; margin: 0; padding: 0; }
   .rail > li {
-    display: grid;
-    grid-template-columns: 11rem 1fr;
-    gap: .25rem 1.5rem;
-    padding: .9rem 0;
+    display: grid; grid-template-columns: 11rem 1fr; gap: .25rem 1.5rem; padding: .8rem 0;
   }
   .when {
-    font-family: var(--mono);
-    font-size: .875rem;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-    padding-top: .2rem;
+    font-family: var(--mono); font-size: .875rem; color: var(--muted);
+    font-variant-numeric: tabular-nums; white-space: nowrap; padding-top: .2rem;
   }
   .org { font-weight: 600; display: block; }
   .roles { margin: 0; padding: 0; list-style: none; }
   .roles li { display: block; padding: 0; color: var(--muted); }
   .roles .sub { font-family: var(--mono); font-size: .8125rem; margin-left: .5rem; }
-  .place { color: var(--muted); }
+  .place { color: var(--muted); font-weight: 400; }
 
-  /* Projects: two-column grid, one rule above */
-  .projects {
-    list-style: none;
-    margin: 0;
-    padding: 1.5rem 0 0;
-    border-top: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.25rem 3rem;
+  .edu { margin-top: 2.25rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+  .edu h3 { margin-bottom: .75rem; }
+  .edu ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 2rem; }
+  .edu li { color: var(--muted); font-size: 1rem; }
+  .edu li b { color: var(--fg); font-weight: 600; display: block; }
+  .edu .when { display: block; padding: 0; margin-top: .15rem; }
+
+  /* Project tiles (B) */
+  .tiles {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2.25rem 2rem;
   }
-  .projects h3 { font-size: 1.0625rem; font-weight: 600; }
-  .projects p { margin: .35rem 0 .6rem; color: var(--muted); font-size: 1rem; }
-  .projects .foot {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: .25rem 1.25rem;
-    font-size: .9375rem;
-    font-weight: 500;
+  .tile { display: flex; flex-direction: column; min-width: 0; }
+  .tile.big { grid-column: 1 / -1; }
+  .shot { display: block; aspect-ratio: 3 / 2; max-width: 100%; overflow: hidden; background: var(--tint); border: 1px solid var(--rule); }
+  .tile.big .shot { aspect-ratio: 2 / 1; }
+  .shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .tile h3 { margin-top: .9rem; }
+  .tile p { margin: .3rem 0 .6rem; color: var(--muted); font-size: 1rem; }
+  .foot {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem 1.25rem;
+    font-size: .9375rem; font-weight: 500; margin-top: auto;
   }
-  .projects .tag {
-    font-family: var(--mono);
-    font-size: .8125rem;
-    font-weight: 400;
-    color: var(--muted);
-    margin-right: auto;
-  }
+  .tag { font-family: var(--mono); font-size: .8125rem; font-weight: 400; color: var(--muted); margin-right: auto; }
+  .more { list-style: none; margin: 2.25rem 0 0; padding: 1.5rem 0 0; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
+  .more li { min-width: 0; display: flex; flex-direction: column; }
+  .more p { margin: .3rem 0 .6rem; color: var(--muted); font-size: 1rem; }
+
+  /* Now (E) and recently pushed (F) */
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem 3rem; }
+  .pair > div { min-width: 0; }
+  .now dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: .5rem 1.25rem; }
+  .now dt { font-family: var(--mono); font-size: .8125rem; color: var(--muted); padding-top: .25rem; }
+  .now dd { margin: 0; }
+  .pushed ol { list-style: none; margin: 0; padding: 0; }
+  .pushed li { display: grid; grid-template-columns: 1fr auto; gap: .25rem 1rem; padding: .45rem 0; border-bottom: 1px solid var(--rule); }
+  .pushed li:last-child { border-bottom: 0; }
+  .pushed li span { color: var(--muted); font-size: .9375rem; display: block; }
+  .pushed time { font-family: var(--mono); font-size: .8125rem; color: var(--muted); white-space: nowrap; padding-top: .2rem; }
+  .pushed .quiet { color: var(--muted); margin: 0; }
 
   footer { margin-top: 5rem; color: var(--muted); font-size: .9375rem; }
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
     body { font-size: 1rem; }
-    .hero { grid-template-columns: 1fr; padding-top: 3rem; }
-    .hero img { width: 88px; height: 88px; order: -1; }
+    .hero { grid-template-columns: 1fr; padding-top: 2.5rem; gap: .5rem; }
+    .hero img { width: 96px; height: 96px; order: -1; margin: 0 0 1rem; }
     .hero h1 { font-size: 2rem; }
     .rail > li { grid-template-columns: 1fr; gap: .15rem; }
     .roles .sub { display: block; margin-left: 0; }
-    .projects { grid-template-columns: 1fr; gap: 1.75rem; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    a { transition: none; }
+    .edu ul, .tiles, .more, .pair { grid-template-columns: 1fr; }
+    .tile.big .shot { aspect-ratio: 16 / 9; }
+    .strip .row { height: 22px; }
+    .bar { font-size: .6875rem; line-height: 22px; padding: 0 .35rem; }
+    .strip .axis span:nth-child(even) { display: none; }
   }
 </style>
 </head>
@@ -196,8 +224,9 @@
 <main id="main">
   <header class="hero">
     <div>
-      <h1>Donatas Daubaras</h1>
-      <p class="role">Senior Software Engineer at <a href="https://www.turingcollege.com/">Turing&nbsp;College</a><br><span>Vilnius, Lithuania</span></p>
+      <p class="mast">Donatas Daubaras, Vilnius</p>
+      <h1>Labas. I’m a backend engineer who likes <em>shipping</em> things.</h1>
+      <p class="sub">Senior Software Engineer at <a href="https://www.turingcollege.com/">Turing&nbsp;College</a>. 10+ years in the industry, mostly Go, Java and TypeScript.</p>
       <ul class="links">
         <li><a href="https://github.com/DonatasD" rel="me">GitHub</a></li>
         <li><a href="https://www.linkedin.com/in/ddaubaras/" rel="me">LinkedIn</a></li>
@@ -210,12 +239,34 @@
 
   <section class="about" aria-labelledby="about">
     <h2 id="about">About</h2>
-    <p>I’m a software engineer with 10+ years in the industry, working mostly in Go, Java and TypeScript. I’ve led an engineering team and worked as a technical architect at Shift4, and I chose to go back to hands-on engineering because I like shipping things.</p>
+    <p>I’ve led an engineering team and worked as a technical architect at Shift4, and I chose to go back to hands-on engineering because I like building things more than planning them.</p>
     <p>I studied computer science at Newcastle University and spent a year in its Cloud Computing for Big Data doctoral training programme before moving back to Lithuania. Outside work I build small tools for my family and tinker with games.</p>
   </section>
 
-  <section aria-labelledby="experience">
-    <h2 id="experience">Experience</h2>
+  <section aria-labelledby="career">
+    <h2 id="career">Career</h2>
+    <div class="strip" role="figure" aria-label="Career timeline from 2011 to 2026. Work bars in the accent colour, study bars in a light tint. Each bar is listed in text below.">
+      <div class="row">
+        <span class="bar" tabindex="0" style="left:11.54%;width:5.49%" data-tip="Trotec Laser, Jun 2013 to Mar 2014" aria-label="Trotec Laser, June 2013 to March 2014">Trotec</span>
+        <span class="bar" tabindex="0" style="left:32.42%;width:12.09%" data-tip="Zenitech, Aug 2016 to May 2018" aria-label="Zenitech, August 2016 to May 2018">Zenitech</span>
+        <span class="bar" tabindex="0" style="left:43.41%;width:17.03%" data-tip="Corner Case Technologies, Apr 2018 to Oct 2020" aria-label="Corner Case Technologies, April 2018 to October 2020">Corner Case</span>
+        <span class="bar" tabindex="0" style="left:59.89%;width:24.73%" data-tip="Shift4 Payments, Oct 2020 to Jun 2024" aria-label="Shift4 Payments, October 2020 to June 2024">Shift4</span>
+        <span class="bar" tabindex="0" style="left:85.71%;width:2.20%" data-tip="Billo, Sep 2024 to Dec 2024" aria-label="Billo, September 2024 to December 2024"></span>
+        <span class="bar" tabindex="0" style="left:87.36%;width:12.64%" data-tip="Turing College, Dec 2024 to present" aria-label="Turing College, December 2024 to present">Turing</span>
+      </div>
+      <div class="row">
+        <span class="bar" tabindex="0" style="left:79.12%;width:7.14%" data-tip="Barbora, Sep 2023 to Sep 2024" aria-label="Barbora, September 2023 to September 2024">Barbora</span>
+      </div>
+      <div class="row edu">
+        <span class="bar" tabindex="0" style="left:0;width:25.27%" data-tip="MComp Computer Science, Newcastle University, 2011 to 2015" aria-label="MComp Computer Science, Newcastle University, 2011 to 2015">MComp</span>
+        <span class="bar" tabindex="0" style="left:26.37%;width:6.59%" data-tip="PhD programme, Newcastle University, 2015 to 2016" aria-label="PhD programme, Newcastle University, 2015 to 2016">PhD</span>
+      </div>
+      <div class="axis" aria-hidden="true">
+        <span style="left:2.20%">2012</span><span style="left:15.38%">2014</span><span style="left:28.57%">2016</span><span style="left:41.76%">2018</span><span style="left:54.95%">2020</span><span style="left:68.13%">2022</span><span style="left:81.32%">2024</span><span style="left:94.51%">2026</span>
+      </div>
+      <p class="key">Bar width is time served. Hover or tab to a bar for its dates.</p>
+    </div>
+
     <ol class="rail">
       <li>
         <span class="when">Dec 2024 - present</span>
@@ -252,26 +303,39 @@
         <div><span class="org">Trotec Laser <span class="place">Newcastle upon Tyne</span></span><ul class="roles"><li>Software Developer, two placements alongside university</li></ul></div>
       </li>
     </ol>
+
+    <div class="edu">
+      <h3>Education</h3>
+      <ul>
+        <li><b>PhD programme, CDT in Cloud Computing for Big Data</b>Newcastle University<span class="when">2015 - 2016</span></li>
+        <li><b>MComp Computer Science, Mobile and Distributed Systems</b>Newcastle University<span class="when">2011 - 2015</span></li>
+      </ul>
+    </div>
   </section>
 
   <section aria-labelledby="projects">
     <h2 id="projects">Projects</h2>
-    <ul class="projects">
-      <li>
+    <ul class="tiles">
+      <li class="tile big">
+        <a class="shot" href="https://garbage.donugne.com/" aria-label="Open the garbage collection calendar"><img src="/assets/shot-garbage.webp" width="1200" height="800" alt="The garbage collection calendar site: subscribe buttons and a table of upcoming pickup dates" loading="lazy"></a>
         <h3>Garbage collection calendar</h3>
         <p>iCal feed for waste collection days at Samanų g., Didžioji Riešė. Subscribe once and the pickups show up in your calendar.</p>
         <div class="foot"><span class="tag">JavaScript</span><a href="https://garbage.donugne.com/">Live</a><a href="https://github.com/DonatasD/garbage">Source</a></div>
       </li>
-      <li>
+      <li class="tile">
+        <a class="shot" href="https://sports-progress-diary.vercel.app" aria-label="Open the sports diary"><img src="/assets/shot-sports.webp" width="1200" height="800" alt="Sports Diary sign-in screen: padel, running and gym, private app, invite only" loading="lazy"></a>
         <h3>Sports diary</h3>
         <p>A private, mobile-first diary for padel, running and gym sessions, with optional Strava sync.</p>
         <div class="foot"><span class="tag">TypeScript, Next.js, Supabase</span><a href="https://sports-progress-diary.vercel.app">Live</a><a href="https://github.com/DonatasD/sport-progress-diary">Source</a></div>
       </li>
-      <li>
+      <li class="tile">
+        <a class="shot" href="https://don-ugne-recipes.vercel.app" aria-label="Open the family recipes site"><img src="/assets/shot-recipes.webp" width="1200" height="800" alt="Don and Ugnė’s Recipes sign-in screen with an illustrated garden and two cats" loading="lazy"></a>
         <h3>Family recipes</h3>
-        <p>Don and Ugnė’s recipes, in one place.</p>
+        <p>Don and Ugnė’s recipes, in one place. Just for the two of us and the cats.</p>
         <div class="foot"><span class="tag">TypeScript</span><a href="https://don-ugne-recipes.vercel.app">Live</a><a href="https://github.com/DonatasD/family-recipes">Source</a></div>
       </li>
+    </ul>
+    <ul class="more">
       <li>
         <h3>Helheim</h3>
         <p>A Slay-the-Spire-style roguelike deck-builder set on the Norse barrow road. Deterministic rules engine, Bevy front end.</p>
@@ -285,23 +349,70 @@
     </ul>
   </section>
 
-  <section aria-labelledby="education">
-    <h2 id="education">Education</h2>
-    <ol class="rail">
-      <li>
-        <span class="when">2015 - 2016</span>
-        <div><span class="org">Newcastle University</span><ul class="roles"><li>PhD programme, CDT in Cloud Computing for Big Data</li></ul></div>
-      </li>
-      <li>
-        <span class="when">2011 - 2015</span>
-        <div><span class="org">Newcastle University</span><ul class="roles"><li>MComp Computer Science, Mobile and Distributed Systems</li></ul></div>
-      </li>
-    </ol>
+  <section aria-labelledby="now">
+    <div class="pair">
+      <div class="now">
+        <h2 id="now">Now</h2>
+        <dl>
+          <dt>Building</dt><dd>Helheim, a Rust deck-builder. Mostly the rules engine.</dd>
+          <dt>Training</dt><dd>Padel, running and gym, logged in my sports diary.</dd>
+          <dt>Updated</dt><dd>October 2026</dd>
+        </dl>
+      </div>
+      <div class="pushed">
+        <h2 id="pushed">Recently pushed</h2>
+        <ol id="pushed-list" aria-live="polite" aria-busy="true">
+          <li><p class="quiet">Checking GitHub…</p></li>
+        </ol>
+      </div>
+    </div>
   </section>
 
   <footer>
     <p>Lithuanian and English. The best way to reach me is <a href="https://www.linkedin.com/in/ddaubaras/">LinkedIn</a>.</p>
   </footer>
 </main>
+
+<script>
+  (function () {
+    var list = document.getElementById('pushed-list');
+    if (!list || !window.fetch) return;
+    var fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short' });
+    var fmtYear = new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric' });
+    function quiet(text, href) {
+      list.innerHTML = '';
+      var li = document.createElement('li'), p = document.createElement('p');
+      p.className = 'quiet';
+      if (href) {
+        p.appendChild(document.createTextNode(text + ' '));
+        var a = document.createElement('a'); a.href = href; a.textContent = 'Everything public is on GitHub.';
+        p.appendChild(a);
+      } else { p.textContent = text; }
+      li.appendChild(p); list.appendChild(li);
+      list.setAttribute('aria-busy', 'false');
+    }
+    fetch('https://api.github.com/users/DonatasD/repos?sort=pushed&direction=desc&per_page=8&type=owner', { headers: { Accept: 'application/vnd.github+json' } })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error(String(r.status))); })
+      .then(function (repos) {
+        var rows = repos.filter(function (r) { return !r.fork && r.name !== 'donatasd.github.io'; }).slice(0, 3);
+        if (!rows.length) return quiet('Nothing public lately.', 'https://github.com/DonatasD');
+        list.innerHTML = '';
+        var now = new Date();
+        rows.forEach(function (r) {
+          var li = document.createElement('li');
+          var d = new Date(r.pushed_at);
+          var left = document.createElement('div');
+          var a = document.createElement('a'); a.href = r.html_url; a.textContent = r.name;
+          left.appendChild(a);
+          if (r.description) { var s = document.createElement('span'); s.textContent = r.description; left.appendChild(s); }
+          var t = document.createElement('time'); t.dateTime = r.pushed_at;
+          t.textContent = d.getFullYear() === now.getFullYear() ? fmt.format(d) : fmtYear.format(d);
+          li.appendChild(left); li.appendChild(t); list.appendChild(li);
+        });
+        list.setAttribute('aria-busy', 'false');
+      })
+      .catch(function () { quiet('GitHub did not answer just now.', 'https://github.com/DonatasD'); });
+  })();
+</script>
 </body>
 </html>
