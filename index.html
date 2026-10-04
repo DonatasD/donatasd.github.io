@@ -169,12 +169,8 @@
   .more li { min-width: 0; display: flex; flex-direction: column; }
   .more p { margin: .3rem 0 .6rem; color: var(--muted); font-size: 1rem; }
 
-  /* Now (E) and recently pushed (F) */
-  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem 3rem; }
-  .pair > div { min-width: 0; }
-  .now dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: .5rem 1.25rem; }
-  .now dt { font-family: var(--mono); font-size: .8125rem; color: var(--muted); padding-top: .25rem; }
-  .now dd { margin: 0; }
+  /* Recently pushed (F) */
+  .pushed { max-width: 36rem; }
   .pushed ol { list-style: none; margin: 0; padding: 0; }
   .pushed li { display: grid; grid-template-columns: 1fr auto; gap: .25rem 1rem; padding: .45rem 0; border-bottom: 1px solid var(--rule); }
   .pushed li:last-child { border-bottom: 0; }
@@ -193,7 +189,7 @@
     .rail > li > .when, .rail > li > div, .dur { grid-column: auto; grid-row: auto; }
     .dur { order: 3; padding-top: .2rem; }
     .roles .sub { flex-basis: 100%; }
-    .edu ul, .tiles, .more, .pair { grid-template-columns: 1fr; }
+    .edu ul, .tiles, .more { grid-template-columns: 1fr; }
     .tile.big .shot { aspect-ratio: 16 / 9; }
   }
 </style>
@@ -313,23 +309,11 @@
     </ul>
   </section>
 
-  <section aria-labelledby="now">
-    <div class="pair">
-      <div class="now">
-        <h2 id="now">Now</h2>
-        <dl>
-          <dt>Building</dt><dd>Helheim, a Rust deck-builder. Mostly the rules engine.</dd>
-          <dt>Training</dt><dd>Padel, running and gym, logged in my sports diary.</dd>
-          <dt>Updated</dt><dd>October 2026</dd>
-        </dl>
-      </div>
-      <div class="pushed">
-        <h2 id="pushed">Recently pushed</h2>
-        <ol id="pushed-list" aria-live="polite" aria-busy="true">
-          <li><p class="quiet">Checking GitHub…</p></li>
-        </ol>
-      </div>
-    </div>
+  <section class="pushed" aria-labelledby="pushed">
+    <h2 id="pushed">Recently pushed</h2>
+    <ol id="pushed-list" aria-live="polite" aria-busy="true">
+      <li><p class="quiet">Checking GitHub…</p></li>
+    </ol>
   </section>
 
   <footer>
