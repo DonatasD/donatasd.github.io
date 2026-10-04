@@ -75,7 +75,7 @@
     transition: color 150ms ease, text-decoration-color 150ms ease;
   }
   a:hover { text-decoration-color: currentColor; }
-  a:focus-visible, .skip:focus, .bar:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a:focus-visible, .skip:focus { outline: 2px solid var(--accent); outline-offset: 3px; }
 
   .skip {
     position: absolute; left: 1rem; top: -3rem;
@@ -120,45 +120,25 @@
   section { margin-top: 4.5rem; }
   .about p { max-width: 62ch; }
 
-  /* Career strip (C), drawn to scale from Sep 2011 to Oct 2026 */
-  .strip { margin: 0 0 2.25rem; }
-  .strip .row { position: relative; height: 26px; margin-bottom: 6px; }
-  .strip .row.edu { height: 16px; margin-top: 10px; }
-  .bar {
-    position: absolute; top: 0; height: 100%;
-    background: var(--accent); color: var(--accent-ink);
-    font-family: var(--mono); font-size: .75rem; line-height: 26px; padding: 0 .5rem;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    border-right: 2px solid var(--bg);
-  }
-  .row.edu .bar { background: var(--tint); color: var(--accent); line-height: 16px; font-size: .6875rem; }
-  .bar:hover, .bar:focus { overflow: visible; z-index: 2; }
-  .bar:hover::after, .bar:focus::after {
-    content: attr(data-tip);
-    position: absolute; left: 0; bottom: calc(100% + 6px);
-    background: var(--fg); color: var(--bg);
-    padding: .25rem .5rem; line-height: 1.4; white-space: nowrap;
-  }
-  .strip .axis { position: relative; height: 18px; border-top: 1px solid var(--rule); margin-top: 4px; }
-  .strip .axis span {
-    position: absolute; top: 3px; transform: translateX(-50%);
-    font-family: var(--mono); font-size: .6875rem; color: var(--muted);
-  }
-  .strip .key { font-family: var(--mono); font-size: .75rem; color: var(--muted); margin: .75rem 0 0; }
-
-  /* Grouped list under the strip */
+  /* Career list */
   .rail { list-style: none; margin: 0; padding: 0; }
   .rail > li {
-    display: grid; grid-template-columns: 11rem 1fr; gap: .25rem 1.5rem; padding: .8rem 0;
+    display: grid; grid-template-columns: 11rem 1fr 10rem; gap: .25rem 1.5rem; padding: .8rem 0; align-items: start;
   }
+  .rail > li > .when { grid-column: 1; grid-row: 1; }
+  .rail > li > div { grid-column: 2; grid-row: 1; }
+  .dur { grid-column: 3; grid-row: 1; display: flex; align-items: center; gap: .6rem; padding-top: .55rem; min-width: 0; }
+  .dur .track { flex: 1 1 auto; min-width: 0; }
+  .dur i { display: block; height: 8px; background: var(--accent); }
+  .dur em { flex: none; width: 4.5rem; font-family: var(--mono); font-style: normal; font-size: .8125rem; color: var(--muted); white-space: nowrap; }
   .when {
     font-family: var(--mono); font-size: .875rem; color: var(--muted);
     font-variant-numeric: tabular-nums; white-space: nowrap; padding-top: .2rem;
   }
   .org { font-weight: 600; display: block; }
   .roles { margin: 0; padding: 0; list-style: none; }
-  .roles li { display: block; padding: 0; color: var(--muted); }
-  .roles .sub { font-family: var(--mono); font-size: .8125rem; margin-left: .5rem; }
+  .roles li { display: flex; flex-wrap: wrap; gap: 0 .5rem; padding: 0; color: var(--muted); }
+  .roles .sub { font-family: var(--mono); font-size: .8125rem; white-space: nowrap; align-self: center; }
   .place { color: var(--muted); font-weight: 400; }
 
   .edu { margin-top: 2.25rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
@@ -210,12 +190,11 @@
     .hero img { width: 96px; height: 96px; order: -1; margin: 0 0 1rem; }
     .hero h1 { font-size: 2rem; }
     .rail > li { grid-template-columns: 1fr; gap: .15rem; }
-    .roles .sub { display: block; margin-left: 0; }
+    .rail > li > .when, .rail > li > div, .dur { grid-column: auto; grid-row: auto; }
+    .dur { order: 3; padding-top: .2rem; }
+    .roles .sub { flex-basis: 100%; }
     .edu ul, .tiles, .more, .pair { grid-template-columns: 1fr; }
     .tile.big .shot { aspect-ratio: 16 / 9; }
-    .strip .row { height: 22px; }
-    .bar { font-size: .6875rem; line-height: 22px; padding: 0 .35rem; }
-    .strip .axis span:nth-child(even) { display: none; }
   }
 </style>
 </head>
@@ -245,43 +224,25 @@
 
   <section aria-labelledby="career">
     <h2 id="career">Career</h2>
-    <div class="strip" role="figure" aria-label="Career timeline from 2011 to 2026. Work bars in the accent colour, study bars in a light tint. Each bar is listed in text below.">
-      <div class="row">
-        <span class="bar" tabindex="0" style="left:11.54%;width:5.49%" data-tip="Trotec Laser, Jun 2013 to Mar 2014" aria-label="Trotec Laser, June 2013 to March 2014">Trotec</span>
-        <span class="bar" tabindex="0" style="left:32.42%;width:12.09%" data-tip="Zenitech, Aug 2016 to May 2018" aria-label="Zenitech, August 2016 to May 2018">Zenitech</span>
-        <span class="bar" tabindex="0" style="left:43.41%;width:17.03%" data-tip="Corner Case Technologies, Apr 2018 to Oct 2020" aria-label="Corner Case Technologies, April 2018 to October 2020">Corner Case</span>
-        <span class="bar" tabindex="0" style="left:59.89%;width:24.73%" data-tip="Shift4 Payments, Oct 2020 to Jun 2024" aria-label="Shift4 Payments, October 2020 to June 2024">Shift4</span>
-        <span class="bar" tabindex="0" style="left:85.71%;width:2.20%" data-tip="Billo, Sep 2024 to Dec 2024" aria-label="Billo, September 2024 to December 2024"></span>
-        <span class="bar" tabindex="0" style="left:87.36%;width:12.64%" data-tip="Turing College, Dec 2024 to present" aria-label="Turing College, December 2024 to present">Turing</span>
-      </div>
-      <div class="row">
-        <span class="bar" tabindex="0" style="left:79.12%;width:7.14%" data-tip="Barbora, Sep 2023 to Sep 2024" aria-label="Barbora, September 2023 to September 2024">Barbora</span>
-      </div>
-      <div class="row edu">
-        <span class="bar" tabindex="0" style="left:0;width:25.27%" data-tip="MComp Computer Science, Newcastle University, 2011 to 2015" aria-label="MComp Computer Science, Newcastle University, 2011 to 2015">MComp</span>
-        <span class="bar" tabindex="0" style="left:26.37%;width:6.59%" data-tip="PhD programme, Newcastle University, 2015 to 2016" aria-label="PhD programme, Newcastle University, 2015 to 2016">PhD</span>
-      </div>
-      <div class="axis" aria-hidden="true">
-        <span style="left:2.20%">2012</span><span style="left:15.38%">2014</span><span style="left:28.57%">2016</span><span style="left:41.76%">2018</span><span style="left:54.95%">2020</span><span style="left:68.13%">2022</span><span style="left:81.32%">2024</span><span style="left:94.51%">2026</span>
-      </div>
-      <p class="key">Bar width is time served. Hover or tab to a bar for its dates.</p>
-    </div>
-
     <ol class="rail">
       <li>
         <span class="when">Dec 2024 - present</span>
+        <span class="dur" id="dur-turing"><span class="track"><i aria-hidden="true" style="width:49%"></i></span><em>1 y 10 m</em></span>
         <div><span class="org">Turing College</span><ul class="roles"><li>Senior Software Engineer</li></ul></div>
       </li>
       <li>
         <span class="when">Sep 2024 - Dec 2024</span>
+        <span class="dur"><span class="track"><i aria-hidden="true" style="width:9%"></i></span><em>4 m</em></span>
         <div><span class="org">Billo</span><ul class="roles"><li>Senior Software Engineer</li></ul></div>
       </li>
       <li>
         <span class="when">Sep 2023 - Sep 2024</span>
+        <span class="dur"><span class="track"><i aria-hidden="true" style="width:29%"></i></span><em>1 y 1 m</em></span>
         <div><span class="org">Barbora</span><ul class="roles"><li>Senior Software Engineer</li></ul></div>
       </li>
       <li>
         <span class="when">Oct 2020 - Jun 2024</span>
+        <span class="dur"><span class="track"><i aria-hidden="true" style="width:100%"></i></span><em>3 y 9 m</em></span>
         <div>
           <span class="org">Shift4 Payments</span>
           <ul class="roles">
@@ -292,14 +253,17 @@
       </li>
       <li>
         <span class="when">Apr 2018 - Oct 2020</span>
+        <span class="dur"><span class="track"><i aria-hidden="true" style="width:69%"></i></span><em>2 y 7 m</em></span>
         <div><span class="org">Corner Case Technologies</span><ul class="roles"><li>Senior Software Developer</li></ul></div>
       </li>
       <li>
         <span class="when">Aug 2016 - May 2018</span>
+        <span class="dur"><span class="track"><i aria-hidden="true" style="width:49%"></i></span><em>1 y 10 m</em></span>
         <div><span class="org">Zenitech</span><ul class="roles"><li>Software Developer</li></ul></div>
       </li>
       <li>
         <span class="when">2013 - 2014</span>
+        <span class="dur"><span class="track"><i aria-hidden="true" style="width:22%"></i></span><em>10 m</em></span>
         <div><span class="org">Trotec Laser <span class="place">Newcastle upon Tyne</span></span><ul class="roles"><li>Software Developer, two placements alongside university</li></ul></div>
       </li>
     </ol>
@@ -374,6 +338,16 @@
 </main>
 
 <script>
+  (function () {
+    // Keep the Turing College tenure current. Scale: Shift4, 45 months, is the full bar.
+    var d = document.getElementById('dur-turing');
+    if (d) {
+      var now = new Date(), months = (now.getFullYear() - 2024) * 12 + now.getMonth() - 11;
+      var y = Math.floor(months / 12), m = months % 12;
+      d.querySelector('i').style.width = Math.min(100, Math.round(months / 45 * 100)) + '%';
+      d.querySelector('em').textContent = (y ? y + ' y ' : '') + m + ' m';
+    }
+  })();
   (function () {
     var list = document.getElementById('pushed-list');
     if (!list || !window.fetch) return;
